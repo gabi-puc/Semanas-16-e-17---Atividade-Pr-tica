@@ -66,6 +66,29 @@ function buildCarousel(lugares) {
     });
 }
 
+async function deleteLugar(id, colElement) {
+    try {
+        const response = await fetch(`${API_URL}/lugares/${id}`, { method: 'DELETE' });
+        if (response.ok) {
+            colElement.remove();
+        } else {
+            showDeleteError();
+        }
+    } catch (error) {
+        showDeleteError();
+    }
+}
+
+function showDeleteError() {
+    const section = document.getElementById('lugares');
+    if (!section) return;
+    if (section.querySelector('.delete-error-alert')) return;
+    const alert = document.createElement('div');
+    alert.className = 'alert alert-danger delete-error-alert mt-2';
+    alert.textContent = 'Erro ao excluir o lugar. Verifique se o servidor está online.';
+    section.querySelector('.container').prepend(alert);
+}
+
 function buildCards(lugares) {
     const container = document.getElementById('cards-container');
 
@@ -81,9 +104,13 @@ function buildCards(lugares) {
                     <h5 class="card-title">${lugar.nome}</h5>
                     <p class="card-text">${lugar.descricao}</p>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer d-flex justify-content-between align-items-center flex-wrap gap-1">
                     <small class="text-muted"><i class="bi bi-geo-alt"></i> ${lugar.localizacao}</small>
-                    <a href="detalhes.html?id=${lugar.id}" class="btn btn-primary btn-sm float-end">Ver Detalhes</a>
+                    <div>
+                        <a href="detalhes.html?id=${lugar.id}" class="btn btn-primary btn-sm">Ver Detalhes</a>
+                        <button class="btn btn-warning btn-sm" onclick="window.location.href='cadastro_lugar.html?id=${lugar.id}'">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteLugar(${lugar.id}, this.closest('.col'))">Excluir</button>
+                    </div>
                 </div>
             </div>
         `;
