@@ -1,0 +1,310 @@
+- id: T-1
+  title: "Ambiente: inicializar git e criar tag v1.0"
+  status: in_progress
+  goal: >
+    Garantir que o repositório git está inicializado, o ambiente do JSON Server funciona
+    e existe um commit raiz com tag v1.0 representando o estado inicial do projeto.
+  repositories:
+    - trabalho-pratico
+  pr_scope: Commit inicial com todos os arquivos atuais do projeto mais tag v1.0.
+  scope:
+    - Rodar git init na raiz do projeto caso o repositório ainda não exista
+    - Adicionar .gitignore com node_modules/ e arquivos irrelevantes
+    - Criar commit com todos os arquivos existentes exceto node_modules
+    - "Criar tag anotada v1.0 com mensagem: chore: Testes da API para a estrutura lugares"
+  out_of_scope:
+    - Qualquer alteração nos arquivos JS, HTML ou CSS existentes
+    - Push para repositório remoto
+    - Criação de novos arquivos além do .gitignore
+  files_or_areas:
+    - .gitignore
+    - db/db.json
+    - public/index.html
+    - public/detalhes.html
+    - public/assets/
+    - package.json
+  implementation_notes:
+    - Verificar se .git já existe antes de rodar git init
+    - O .gitignore deve incluir node_modules/ e arquivos *.zip
+    - Confirmar que o JSON Server sobe em localhost:3000 via npm start antes de commitar
+    - Mensagem do commit inicial pode ser chore:estrutura inicial do projeto Mundo Tour
+  acceptance_criteria:
+    - git log --oneline mostra pelo menos um commit
+    - git tag lista v1.0
+    - git show v1.0 exibe a mensagem correta chore:Testes da API para a estrutura lugares
+    - O diretório node_modules/ não aparece em git status pois está no .gitignore
+  assumptions:
+    - O JSON Server está instalado em node_modules/ (já confirmado pela existência da pasta)
+    - O script npm start já está configurado corretamente no package.json
+    - Nenhum repositório git foi inicializado anteriormente nesta pasta
+  dependencies: []
+  test_strategy:
+    existing_tests_to_reuse: []
+    tests_to_add:
+      - level: manual
+        behavior: Rodar npm start e verificar no terminal que o JSON Server sobe sem erros em http://localhost:3000
+        location_hint: terminal
+      - level: manual
+        behavior: Abrir http://localhost:3000/lugares no browser e verificar que retorna JSON com 6 registros
+        location_hint: browser
+  validation_commands:
+    - git log --oneline
+    - git tag
+    - git show v1.0 --stat
+    - cat .gitignore
+  definition_of_done:
+    - Acceptance criteria são satisfeitos
+    - Required validation commands passaram sem erro
+    - Tag v1.0 existe no repositório local
+  risks:
+    - Se um git init parcial existir com conflitos, pode ser necessário resolver antes de commitar
+  pr_size_hint: small
+  execution:
+    requires_worktree: true
+    branch: task/t-1-ambiente-git-tag-v1
+    worktree_path: ../wt-trabalho-t-1
+    base_branch: main
+
+- id: T-2
+  title: "Listagem CRUD: adicionar DELETE e botões de navegação no app.js"
+  status: in_progress
+  goal: >
+    Estender app.js para que cada card da listagem tenha botões Excluir e Editar,
+    e a seção de listagem tenha botão Novo Cadastro, com DELETE atualizado dinamicamente no DOM.
+  repositories:
+    - trabalho-pratico
+  pr_scope: >
+    Modificação de public/assets/js/app.js para incluir DELETE funcional
+    e botões de navegação para o formulário de cadastro.
+  scope:
+    - Refatorar buildCards() em app.js para incluir botões Excluir e Editar no card-footer de cada card
+    - Implementar função deleteLugar(id, colElement) que faz fetch DELETE e remove o col do DOM em caso de sucesso
+    - Exibir div.alert.alert-danger quando DELETE falhar por erro de rede
+    - Adicionar botão Novo Cadastro na secao lugares do index.html acima do div cards-container
+    - O botão Editar navega para cadastro_lugar.html?id=<id> via window.location.href
+    - O botão Novo Cadastro navega para cadastro_lugar.html sem parâmetros
+  out_of_scope:
+    - Criação do arquivo cadastro_lugar.html ou cadastro.js
+    - Alteração das funções fetchLugares, fetchLugarById, fetchExperienciasByLugar, buildCarousel, buildLugarDetalhes, buildExperiencias, formatDate e getQueryParam
+    - Modificação de detalhes.html
+    - Qualquer lógica de POST ou PUT
+  files_or_areas:
+    - public/assets/js/app.js
+    - public/index.html
+  implementation_notes:
+    - Manter a constante API_URL já existente no topo de app.js
+    - Em buildCards(), substituir o botão Ver Detalhes atual por três botões no footer — Ver Detalhes (mantido), Editar (novo), Excluir (novo)
+    - Para o DELETE, passar o elemento col (div pai do card) como parâmetro e removê-lo com colElement.remove()
+    - Botão Excluir usa classes btn btn-danger btn-sm; botão Editar usa btn btn-warning btn-sm
+    - O botão Novo Cadastro no index.html deve ter classe btn btn-success mb-3
+  acceptance_criteria:
+    - Cada card exibido em index.html tem os botões Excluir e Editar no card-footer
+    - Clicar em Excluir dispara DELETE http://localhost:3000/lugares/:id verificável em DevTools Network
+    - Após DELETE bem-sucedido, o card desaparece da tela sem recarregar a página
+    - Clicar em Editar navega para cadastro_lugar.html?id=<id> com o id correto do lugar
+    - Clicar em Novo Cadastro navega para cadastro_lugar.html sem parâmetro id na URL
+    - Quando o JSON Server está offline, clicar em Excluir exibe uma mensagem alert-danger na página e não apenas no console
+  assumptions:
+    - T-1 foi concluída com git inicializado e JSON Server funcional
+    - O arquivo app.js existente não será reescrito do zero — somente buildCards() é refatorada
+    - Bootstrap 5 está disponível via CDN para as classes de botão e alert
+  dependencies:
+    - T-1
+  test_strategy:
+    existing_tests_to_reuse: []
+    tests_to_add:
+      - level: manual
+        behavior: Abrir index.html, verificar que os cards têm botões Excluir e Editar visíveis
+        location_hint: browser
+      - level: manual
+        behavior: Clicar em Excluir, verificar no DevTools Network a requisição DELETE e o card sumindo
+        location_hint: browser DevTools
+      - level: manual
+        behavior: Clicar em Editar, verificar URL da nova página com ?id= correto
+        location_hint: browser URL bar
+      - level: manual
+        behavior: Com JSON Server parado, clicar em Excluir e verificar alert de erro na página
+        location_hint: browser
+  validation_commands:
+    - "git diff HEAD -- public/assets/js/app.js | grep -c DELETE"
+    - "git diff HEAD -- public/index.html | grep -c 'Novo Cadastro'"
+  definition_of_done:
+    - Acceptance criteria são satisfeitos
+    - Nenhuma função existente em app.js foi removida ou quebrada
+    - A listagem de lugares ainda funciona normalmente com carousel e cards
+  risks:
+    - A refatoração de buildCards() pode quebrar a renderização do carousel se as funções compartilharem estado — verificar que buildCarousel e buildCards são independentes
+  pr_size_hint: small
+  execution:
+    requires_worktree: true
+    branch: task/t-2-listagem-crud-delete
+    worktree_path: ../wt-trabalho-t-2
+    base_branch: main
+
+- id: T-3
+  title: "Formulário CRUD: criar cadastro_lugar.html e cadastro.js com POST e PUT (tag v2.0)"
+  status: todo
+  goal: >
+    Criar a página de cadastro/edição de lugares com formulário HTML,
+    lógica de POST (novo) e PUT (edição) via Fetch, validação front-end
+    e redirecionamento após sucesso. Fechar com commit e tag v2.0.
+  repositories:
+    - trabalho-pratico
+  pr_scope: >
+    Criação de public/cadastro_lugar.html e public/assets/js/cadastro.js com CRUD completo
+    via POST, PUT e GET por id.
+  scope:
+    - Criar public/cadastro_lugar.html com navbar, formulário e footer no estilo Bootstrap 5 do projeto
+    - "Formulário com campos: nome (text, required), descricao (textarea, required), conteudo (textarea), localizacao (text, required), categoria (select com opcoes: Natureza, Monumento, Patrimônio Histórico, Ilha, Outro), destaque (checkbox), data (date), imagemPrincipal (text)"
+    - Criar public/assets/js/cadastro.js com toda a lógica do formulário
+    - Ao carregar a página, ler id da query string com URLSearchParams
+    - Se id presente, fazer GET /lugares/:id e preencher o formulário exibindo título Editar Lugar
+    - Se id ausente, exibir formulário vazio com título Novo Lugar
+    - Validação front-end nos campos nome, descricao e localizacao; exibir div.alert.alert-warning e não enviar requisição se inválido
+    - Submit sem id dispara POST http://localhost:3000/lugares com Content-Type application/json
+    - Submit com id dispara PUT http://localhost:3000/lugares/:id com Content-Type application/json
+    - Campo destaque serializado como boolean (checkbox.checked) e não como string
+    - Após POST ou PUT com sucesso, redirecionar para index.html via window.location.href
+    - Em caso de erro de rede, exibir div.alert.alert-danger na página
+    - Criar commit feat:dinâmica de CRUD para lugares com JSONServer e tag v2.0
+  out_of_scope:
+    - Upload real de arquivo de imagem — imagemPrincipal é campo de texto com path relativo
+    - Modificação de app.js ou index.html
+    - Qualquer CRUD da entidade experiencias
+    - Paginação, busca ou filtro
+  files_or_areas:
+    - public/cadastro_lugar.html
+    - public/assets/js/cadastro.js
+  implementation_notes:
+    - Declarar const API_URL = http://localhost:3000 no topo de cadastro.js independente de app.js
+    - O form deve ter id form-lugar para facilitar o querySelector
+    - Campo destaque usa input type=checkbox; ao carregar em modo edição setar checkbox.checked = lugar.destaque
+    - Campo data usa input type=date; o valor de lugar.data já está em formato YYYY-MM-DD compatível com o input
+    - Link Voltar no formulário deve apontar para index.html
+    - Manter consistência visual com navbar navbar-dark bg-dark e footer igual ao index.html
+    - O cadastro_lugar.html deve carregar apenas cadastro.js e não app.js
+  acceptance_criteria:
+    - Acessar cadastro_lugar.html sem parâmetros exibe formulário vazio com título Novo Lugar
+    - Acessar cadastro_lugar.html?id=1 preenche o formulário com dados do lugar id 1 e exibe título Editar Lugar
+    - Submeter o formulário novo com todos os campos obrigatórios dispara POST http://localhost:3000/lugares com header Content-Type application/json verificável em DevTools
+    - Após POST bem-sucedido o browser redireciona para index.html e o novo lugar aparece na listagem
+    - Submeter o formulário de edição com dados alterados dispara PUT http://localhost:3000/lugares/:id verificável em DevTools
+    - Após PUT bem-sucedido o browser redireciona para index.html e o lugar aparece com os dados atualizados
+    - Submeter o formulário com campo nome vazio exibe alert de warning e nenhuma requisição aparece em DevTools Network
+    - Submeter o formulário com JSON Server offline exibe div.alert.alert-danger na página
+    - git tag lista v2.0 após a execução desta tarefa
+    - "git show v2.0 exibe mensagem: feat: dinâmica de CRUD para lugares com JSONServer"
+  assumptions:
+    - T-2 foi concluída e merged antes da criação da tag v2.0
+    - Bootstrap 5 está disponível via CDN em cadastro_lugar.html
+    - O db.json tem o registro de id 1 para testar o modo edição
+    - O campo imagemPrincipal aceita qualquer string com path relativo à raiz public/
+  dependencies:
+    - T-2
+  test_strategy:
+    existing_tests_to_reuse: []
+    tests_to_add:
+      - level: manual
+        behavior: Abrir cadastro_lugar.html sem id, preencher campos, submeter e verificar POST no DevTools e redirecionamento
+        location_hint: browser DevTools Network
+      - level: manual
+        behavior: Abrir cadastro_lugar.html?id=1, verificar preenchimento, alterar nome, submeter e verificar PUT no DevTools
+        location_hint: browser DevTools Network
+      - level: manual
+        behavior: Deixar campo nome vazio, submeter e verificar alert de warning sem requisição de rede
+        location_hint: browser DevTools Network
+      - level: manual
+        behavior: Com JSON Server offline, submeter formulário e verificar alert de erro na página
+        location_hint: browser
+  validation_commands:
+    - ls public/cadastro_lugar.html
+    - ls public/assets/js/cadastro.js
+    - git tag | grep v2.0
+    - git show v2.0 --stat
+  definition_of_done:
+    - Acceptance criteria são satisfeitos
+    - Required validation commands passaram sem erro
+    - Tags v1.0 e v2.0 existem no repositório local
+    - CRUD completo funcional com GET listagem, GET por id, POST, PUT e DELETE
+  risks:
+    - O campo destaque como boolean pode ser serializado incorretamente como string — verificar typeof antes do fetch
+    - CORS pode bloquear requisições se o JSON Server não estiver com flag --static apontando para public/ — o script atual já tem --static public portanto deve funcionar
+  pr_size_hint: medium
+  execution:
+    requires_worktree: true
+    branch: task/t-3-formulario-crud-post-put
+    worktree_path: ../wt-trabalho-t-3
+    base_branch: main
+
+- id: T-4
+  title: "Documentação: criar README.md e publicar tag v3.0"
+  status: todo
+  goal: >
+    Criar README.md completo com todas as seções exigidas pela atividade
+    e publicar tag v3.0 com push para o repositório remoto.
+  repositories:
+    - trabalho-pratico
+  pr_scope: >
+    Criação de README.md com documentação do projeto, commit e tag v3.0,
+    push para origin main com todas as tags.
+  scope:
+    - Criar README.md na raiz do projeto com seções de identificação, descrição, estrutura JSON, como rodar e prints
+    - Seção de identificação com nome do aluno, matrícula, disciplina, curso e turma
+    - Seção de descrição do projeto e da entidade lugares
+    - Estrutura de dados JSON da entidade com exemplo de objeto completo com todos os campos
+    - Instrução de como rodar o projeto com npm install, npm start e abrir http://localhost:3000 no browser
+    - Seção de prints com placeholders indicando onde o usuário deve inserir as imagens
+    - "Criar commit com mensagem: docs: Alterações do README.md e tag v3.0"
+    - Executar git push origin main --tags para enviar tudo ao GitHub
+  out_of_scope:
+    - Modificação de qualquer arquivo JS, HTML ou CSS
+    - Criação de diagramas ou documentação técnica além do pedido
+    - Geração dos prints (responsabilidade do usuário)
+    - Configuração de CI/CD
+  files_or_areas:
+    - README.md
+  implementation_notes:
+    - Antes de escrever o README, perguntar ao usuário o nome completo, matrícula, nome da disciplina e URL do repositório remoto no GitHub
+    - Usar Markdown com headers ## para cada seção
+    - O exemplo JSON da entidade deve usar um dos registros existentes no db.json
+    - Os placeholders de prints devem usar sintaxe de imagem Markdown com texto explicativo
+    - Antes do push, verificar se o remote origin está configurado com git remote -v e pedir a URL ao usuário se necessário
+  acceptance_criteria:
+    - O arquivo README.md existe na raiz do projeto
+    - README.md contém as secoes nome/matrícula/disciplina, descrição, estrutura JSON, como rodar e prints
+    - git tag lista v1.0, v2.0 e v3.0
+    - "git show v3.0 exibe mensagem: docs: Alterações do README.md"
+    - git push origin main --tags executa sem erro com remote configurado
+  assumptions:
+    - T-3 foi concluída antes desta tarefa
+    - O usuário irá fornecer nome, matrícula, disciplina e URL do GitHub quando solicitado
+    - O repositório remoto já existe no GitHub criado pelo usuário
+  dependencies:
+    - T-3
+  test_strategy:
+    existing_tests_to_reuse: []
+    tests_to_add:
+      - level: manual
+        behavior: Ler o README.md e verificar que todas as seções obrigatórias estão presentes e legíveis
+        location_hint: README.md
+      - level: manual
+        behavior: Verificar no GitHub que o repositório remoto tem os commits e as tags v1.0, v2.0 e v3.0
+        location_hint: GitHub.com
+  validation_commands:
+    - cat README.md
+    - git tag
+    - git log --oneline
+    - git remote -v
+  definition_of_done:
+    - Acceptance criteria são satisfeitos
+    - Required validation commands passaram sem erro
+    - As três tags v1.0, v2.0 e v3.0 estão no repositório remoto verificável no GitHub
+  risks:
+    - O remote pode não estar configurado — o executor deve verificar antes do push e pedir a URL ao usuário se necessário
+    - Se o usuário não tiver chave SSH configurada para o GitHub, o push pode falhar — informar sobre o pré-requisito de autenticação git
+  pr_size_hint: small
+  execution:
+    requires_worktree: true
+    branch: task/t-4-readme-tag-v3
+    worktree_path: ../wt-trabalho-t-4
+    base_branch: main

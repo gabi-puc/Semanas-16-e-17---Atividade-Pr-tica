@@ -1,0 +1,11 @@
+{
+  "name": "trabalho-pratico",
+  "version": "1.0.0",
+  "description": "Trabalho prático - Lugares e Atrações Turísticas",
+  "scripts": {
+    "start": "json-server --watch db/db.json --static public --port 3000"
+  },
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}

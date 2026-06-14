@@ -1,0 +1,191 @@
+{
+  "lugares": [
+    {
+      "id": 1,
+      "nome": "Cataratas do Iguaçu",
+      "descricao": "Uma das maiores e mais impressionantes quedas d'água do mundo, na fronteira entre Brasil e Argentina.",
+      "conteudo": "As Cataratas do Iguaçu são formadas por 275 quedas d'água ao longo de 2,7 km do Rio Iguaçu. Eleitas como uma das Novas Sete Maravilhas da Natureza, oferecem um espetáculo visual e sonoro inesquecível. O Parque Nacional do Iguaçu é Patrimônio Mundial da UNESCO desde 1986.",
+      "localizacao": "Foz do Iguaçu, Brasil / Argentina",
+      "categoria": "Natureza",
+      "destaque": true,
+      "data": "2025-03-30",
+      "imagemPrincipal": "assets/img/foz-iguacu.jpg"
+    },
+    {
+      "id": 2,
+      "nome": "Torre Eiffel",
+      "descricao": "O monumento mais icônico de Paris e símbolo da França no mundo inteiro.",
+      "conteudo": "Construída em 1889 para a Exposição Universal, a Torre Eiffel tem 330 metros de altura e recebe cerca de 7 milhões de visitantes por ano. Com seus três andares abertos ao público, oferece vistas panorâmicas deslumbrantes de toda Paris, especialmente ao entardecer.",
+      "localizacao": "Paris, França",
+      "categoria": "Monumento",
+      "destaque": true,
+      "data": "2025-03-28",
+      "imagemPrincipal": "assets/img/torre-paris.jpg"
+    },
+    {
+      "id": 3,
+      "nome": "Machu Picchu",
+      "descricao": "Antiga cidadela inca no topo dos Andes peruanos, uma das maravilhas do mundo.",
+      "conteudo": "Machu Picchu foi construída no século XV pelo imperador inca Pachacuti e redescoberta em 1911. Localizada a 2.430 metros de altitude, a cidadela é um exemplo extraordinário de engenharia e arquitetura inca, cercada por montanhas cobertas de névoa e floresta tropical.",
+      "localizacao": "Cusco, Peru",
+      "categoria": "Patrimônio Histórico",
+      "destaque": true,
+      "data": "2025-03-25",
+      "imagemPrincipal": "assets/img/macchu-picchu.jpg"
+    },
+    {
+      "id": 4,
+      "nome": "Grande Muralha da China",
+      "descricao": "A maior estrutura arquitetônica já construída pela humanidade, com mais de 21.000 km.",
+      "conteudo": "A Grande Muralha foi construída ao longo de vários séculos para proteger o império chinês de invasões. Patrimônio Mundial da UNESCO, ela serpenteia por montanhas, desertos e planícies. O trecho de Mutianyu é um dos mais preservados e visitados.",
+      "localizacao": "Pequim, China",
+      "categoria": "Patrimônio Histórico",
+      "destaque": false,
+      "data": "2025-03-22",
+      "imagemPrincipal": "assets/img/muralha-china.jpg"
+    },
+    {
+      "id": 5,
+      "nome": "Santorini",
+      "descricao": "Ilha grega com vilas brancas sobre falésias vulcânicas e pôr do sol inesquecível.",
+      "conteudo": "Santorini é uma ilha formada por uma erupção vulcânica há mais de 3.600 anos. Suas vilas de casas brancas com cúpulas azuis sobre as falésias da caldeira são um dos cenários mais fotografados do mundo. A ilha combina história antiga, praias únicas e gastronomia mediterrânea.",
+      "localizacao": "Ilhas Cíclades, Grécia",
+      "categoria": "Ilha",
+      "destaque": true,
+      "data": "2025-03-20",
+      "imagemPrincipal": "assets/img/santorini.jpg"
+    },
+    {
+      "id": 6,
+      "nome": "Grand Canyon",
+      "descricao": "Desfiladeiro monumental esculpido pelo Rio Colorado ao longo de milhões de anos.",
+      "conteudo": "O Grand Canyon tem 446 km de extensão, até 29 km de largura e mais de 1.800 metros de profundidade. Suas camadas de rocha revelam milhões de anos de história geológica. É um dos parques nacionais mais visitados dos Estados Unidos e Patrimônio Mundial da UNESCO.",
+      "localizacao": "Arizona, Estados Unidos",
+      "categoria": "Natureza",
+      "destaque": false,
+      "data": "2025-03-18",
+      "imagemPrincipal": "assets/img/grand-cannion.jpg"
+    }
+  ],
+  "experiencias": [
+    {
+      "id": 1,
+      "lugarId": 1,
+      "nome": "Passeio de Barco Macuco Safari",
+      "descricao": "Aventura radical de barco que leva você até a base das quedas d'água.",
+      "imagem": "assets/img/foz-iguacu.jpg"
+    },
+    {
+      "id": 2,
+      "lugarId": 1,
+      "nome": "Trilha das Cataratas",
+      "descricao": "Percurso panorâmico com passarelas sobre o rio e vista frontal das quedas.",
+      "imagem": "assets/img/foz-iguacu.jpg"
+    },
+    {
+      "id": 3,
+      "lugarId": 1,
+      "nome": "Voo Panomâmico de Helicóptero",
+      "descricao": "Sobrevoo emocionante com vista aérea de todas as 275 quedas.",
+      "imagem": "assets/img/foz-iguacu.jpg"
+    },
+    {
+      "id": 4,
+      "lugarId": 2,
+      "nome": "Jantar no Le Jules Verne",
+      "descricao": "Experiência gastronômica exclusiva no restaurante dentro da torre.",
+      "imagem": "assets/img/torre-paris.jpg"
+    },
+    {
+      "id": 5,
+      "lugarId": 2,
+      "nome": "Vista do Topo ao Pôr do Sol",
+      "descricao": "Subida ao terceiro andar da torre para ver Paris iluminada ao entardecer.",
+      "imagem": "assets/img/torre-paris.jpg"
+    },
+    {
+      "id": 6,
+      "lugarId": 2,
+      "nome": "Piquenique no Campo de Marte",
+      "descricao": "Momento relaxante nos jardins com vista direta para a torre.",
+      "imagem": "assets/img/torre-paris.jpg"
+    },
+    {
+      "id": 7,
+      "lugarId": 3,
+      "nome": "Trilha Inca Clássica",
+      "descricao": "Caminhada de 4 dias pelos Andes até a cidadela sagrada.",
+      "imagem": "assets/img/macchu-picchu.jpg"
+    },
+    {
+      "id": 8,
+      "lugarId": 3,
+      "nome": "Nascer do Sol na Cidadela",
+      "descricao": "Chegada ao amanhecer para ver o sol iluminar as ruínas entre as nuvens.",
+      "imagem": "assets/img/macchu-picchu.jpg"
+    },
+    {
+      "id": 9,
+      "lugarId": 3,
+      "nome": "Subida à Huayna Picchu",
+      "descricao": "Escalada ao pico que aparece nas fotos clássicas de Machu Picchu.",
+      "imagem": "assets/img/macchu-picchu.jpg"
+    },
+    {
+      "id": 10,
+      "lugarId": 4,
+      "nome": "Caminhada em Mutianyu",
+      "descricao": "Trecho restaurado da muralha com vistas deslumbrantes das montanhas.",
+      "imagem": "assets/img/muralha-china.jpg"
+    },
+    {
+      "id": 11,
+      "lugarId": 4,
+      "nome": "Tobogã na Muralha",
+      "descricao": "Descida divertida de tobogã pela encosta da montanha ao lado da muralha.",
+      "imagem": "assets/img/muralha-china.jpg"
+    },
+    {
+      "id": 12,
+      "lugarId": 5,
+      "nome": "Pôr do Sol em Oia",
+      "descricao": "O famoso pôr do sol sobre a caldeira visto do ponto mais icônico da ilha.",
+      "imagem": "assets/img/santorini.jpg"
+    },
+    {
+      "id": 13,
+      "lugarId": 5,
+      "nome": "Passeio de Catamarã",
+      "descricao": "Navegação ao redor da ilha com paradas para banho nas águas termais.",
+      "imagem": "assets/img/santorini.jpg"
+    },
+    {
+      "id": 14,
+      "lugarId": 5,
+      "nome": "Degustação de Vinhos Vulcânicos",
+      "descricao": "Prova de vinhos cultivados em solo vulcânico com vista para o mar Egeu.",
+      "imagem": "assets/img/santorini.jpg"
+    },
+    {
+      "id": 15,
+      "lugarId": 6,
+      "nome": "Rafting no Rio Colorado",
+      "descricao": "Aventura de rafting pelas corredeiras no fundo do desfiladeiro.",
+      "imagem": "assets/img/grand-cannion.jpg"
+    },
+    {
+      "id": 16,
+      "lugarId": 6,
+      "nome": "Skywalk – Passarela de Vidro",
+      "descricao": "Caminhada sobre plataforma de vidro suspensa a 1.200 metros do chão.",
+      "imagem": "assets/img/grand-cannion.jpg"
+    },
+    {
+      "id": 17,
+      "lugarId": 6,
+      "nome": "Trilha Bright Angel",
+      "descricao": "Uma das trilhas mais famosas do parque, descendo até o Rio Colorado.",
+      "imagem": "assets/img/grand-cannion.jpg"
+    }
+  ]
+}

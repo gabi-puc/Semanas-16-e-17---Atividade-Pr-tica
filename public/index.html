@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Descubra os melhores lugares do mundo e viva experiências inesquecíveis."
+    />
+    <title>Mundo Tour - Descubra Lugares Incríveis</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <i class="bi bi-globe-americas"></i> Mundo Tour
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="index.html">Início</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#lugares">Lugares</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sobre">Sobre</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="destaques" class="py-4">
+        <div class="container">
+          <h1 class="section-title">Lugares em Destaque</h1>
+          <div
+            id="carouselDestaques"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-indicators" id="carousel-indicators"></div>
+            <div class="carousel-inner" id="carousel-inner"></div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselDestaques"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselDestaques"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="lugares" class="py-5 bg-light">
+        <div class="container">
+          <h2 class="section-title">Todos os Lugares</h2>
+          <div
+            class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
+            id="cards-container"
+          ></div>
+        </div>
+      </section>
+
+      <section id="sobre" class="py-5">
+        <div class="container">
+          <h2 class="section-title">Informações do(a) Aluno(a)</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Sobre</h3>
+              <p>
+                Este site foi desenvolvido como parte do trabalho prático da
+                disciplina de Desenvolvimento de Interfaces Web. O objetivo é
+                demonstrar o uso de HTML, CSS, JavaScript e APIs RESTful para
+                criação de sites dinâmicos e responsivos.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h3>Autoria</h3>
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-person-circle fs-1 me-3"></i>
+                <div>
+                  <p class="mb-0"><strong>Aluno:</strong> Gabriela Santos</p>
+                  <p class="mb-0"><strong>Curso:</strong> Engenharia Civil</p>
+                  <p class="mb-0"><strong>Turma:</strong> Noite</p>
+                </div>
+              </div>
+              <h4>Redes Sociais</h4>
+              <div class="social-links">
+                <a
+                  href="https://www.linkedin.com/in/gabriela-santos-a7916b283"
+                  target="_blank"
+                  class="me-3"
+                  ><i class="bi bi-linkedin fs-4"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3">
+      <div class="container">
+        <p class="mb-0">
+          &copy; 2025 Gabriela Santos. Todos os direitos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
